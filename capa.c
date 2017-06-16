@@ -17,6 +17,18 @@ Capa* capa_nueva( uint32 tamano ){
 
 }
 
+//////////// DEBUG ///////////
+
+uint32 capa_memoria( Capa* c ){
+
+	uint32 t = sizeof( Capa );
+
+	for( int i = 0; i < c->n_neuronas; ++i){
+		t += neurona_memoria( &c->neuronas[i] );
+	}
+	return t;
+}
+
 void capa_test(){
 
 	puts("Iniciando test de capa\n");
@@ -25,6 +37,7 @@ void capa_test(){
 
 	Capa* capa = capa_nueva( n_neuronas );
 
+	printf("Tamano en memoria de capa = %ubytes\n", capa_memoria( capa ) );
 	printf( "sizeof neurona = %d\n", sizeof( capa->neuronas[0] ) );
 
 	capa->neuronas[0].valor = 0.01f;
@@ -36,5 +49,5 @@ void capa_test(){
 	for(int i = 0; i < n_neuronas; ++i ){
 		printf("neurona n %d = %f\n", i, capa->neuronas[i].valor );
 	}
-
+	puts("------");
 }
