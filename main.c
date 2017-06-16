@@ -18,6 +18,8 @@ int main(){
 
 	//neurona_printear( capa_0->neuronas[4] );
 
+	neurona_test();
+
 	capa_test();
 
 	cerebro_test();
