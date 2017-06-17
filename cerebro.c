@@ -48,6 +48,8 @@ uint32 cerebro_memoria( Cerebro* c ){
 		t += capa_memoria( c->capas[i] );
 	}
 
+	printf("Cerebro memoria total = %u bytes\n", t);
+
 	return t;
 }
 
@@ -68,7 +70,7 @@ void cerebro_test(){
 
 	puts("\nIniciando test de cerebro:\n");
 
-	Cerebro* cerebro = cerebro_nuevo( 4, 10, 10 , 4 );
+	Cerebro* cerebro = cerebro_nuevo( 1, 3, 3, 1 );
 	puts("Cerebro creado.\n");
 	cerebro_mostrar( cerebro );
 	puts("------\n");

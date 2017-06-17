@@ -18,6 +18,21 @@ void neurona_iniciar( Neurona* n ){
 	n->funciones = 0;
 }
 
+int neurona_buscar_conexion( Neurona* n, uint32 neurona_capa_siguiente ){
+	for(int i = 0; i < n->n_conexiones; ++i ){
+		if( n->conexiones[ i ] == neurona_capa_siguiente){
+			return i;
+		}
+	}
+	return -1;
+}
+
+void neurona_adaptar_memoria_a_conexiones( Neurona* n ){
+
+	n->conexiones = realloc(n->conexiones, sizeof( uint32 ) * n->n_conexiones );
+	n->funciones  = realloc(n->funciones,  sizeof( uint32 ) * n->n_conexiones );
+
+}
 
 void neurona_conectar( Neurona* n, uint32 neurona_capa_siguiente, uint32 funcion ){
 
@@ -30,13 +45,34 @@ void neurona_conectar( Neurona* n, uint32 neurona_capa_siguiente, uint32 funcion
 		n->funciones  = malloc( sizeof(uint32) * n->n_conexiones );
 	}
 	else{
-		n->conexiones = realloc( n->conexiones, sizeof(uint32) * n->n_conexiones );
-		n->funciones  = realloc( n->funciones, sizeof(uint32) * n->n_conexiones );
+		neurona_adaptar_memoria_a_conexiones( n );
 	}
 
 	n->conexiones[ n->n_conexiones - 1 ] = neurona_capa_siguiente;
 	n->funciones[ n->n_conexiones - 1 ] = funcion;
 
+}
+
+void neurona_desconectar( Neurona* n, uint32 neurona_capa_siguiente){
+
+	int i_conexion = neurona_buscar_conexion( n, neurona_capa_siguiente );
+
+	if( i_conexion != -1 ){
+
+		printf("Desconectando neurona de %u\n", neurona_capa_siguiente );
+		for(int i = i_conexion + 1; i < n->n_conexiones; ++i ){
+			n->conexiones[ i - 1 ] = n->conexiones[ i ];
+			n->funciones[  i - 1 ] = n->funciones[  i ];
+		}
+
+		n->n_conexiones -= 1;
+
+		neurona_adaptar_memoria_a_conexiones( n );
+
+	}
+	else{
+		printf("Neurona_desconectar: La neurona no estaba conectada con %u\n", neurona_capa_siguiente );
+	}
 }
 
 //////////// DEBUG: ////////////
@@ -84,6 +120,12 @@ void neurona_test(){
 	neurona_conectar( &neurona, 7, 9 );
 	neurona_conectar( &neurona, 11, 13);
 	neurona_conectar( &neurona, 15, 17);
+
+	neurona_mostrar( &neurona );
+
+	neurona_desconectar( &neurona, 7 );
+	neurona_desconectar( &neurona, 7 );
+
 	neurona_mostrar( &neurona );
 
 	puts("------");

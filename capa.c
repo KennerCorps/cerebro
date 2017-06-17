@@ -11,6 +11,9 @@ Capa* capa_nueva( uint32 tamano ){
 
 	Capa* capa = malloc( sizeof( Capa ) );
 	capa->neuronas = malloc( sizeof( Neurona ) * tamano );
+	for( int i = 0; i < tamano; ++i ){
+		neurona_iniciar( &capa->neuronas[i] );
+	}
 	capa->n_neuronas = tamano;
 
 	return capa;
