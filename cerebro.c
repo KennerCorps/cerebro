@@ -33,6 +33,24 @@ Cerebro* cerebro_nuevo( uint32 n_entradas, uint32 n_salidas, uint32 n_capas, uin
 	return cerebro;
 }
 
+
+//////////// DEBUG ////////////
+
+uint32 cerebro_memoria( Cerebro* c ){
+
+	puts("Cerebro memoria:");
+
+	uint32 t = sizeof( *c );
+	t += capa_memoria( c->entrada );
+	t += capa_memoria( c->salida );
+
+	for( int i = 0; i < c->n_capas; ++i ){
+		t += capa_memoria( c->capas[i] );
+	}
+
+	return t;
+}
+
 void cerebro_mostrar( Cerebro* c ){
 
 	puts("cerebro_print:\n");
@@ -42,14 +60,16 @@ void cerebro_mostrar( Cerebro* c ){
 
 	//printf("Numero de entradas = %d\n", c->n_entradas );
 	printf("Numero de entradas = %d\nNumero de salidas = %d\nNumero de capas = %d\nAltura de capas = %d\n\n", c->n_entradas, c->n_salidas, c->n_capas, c->capas_altura );
+
+	printf("Memoria utilizada por el cerebro = %u bytes\n\n", cerebro_memoria( c ) );
 }
 
 void cerebro_test(){
 
 	puts("\nIniciando test de cerebro:\n");
 
-	Cerebro* cerebro = cerebro_nuevo( 2, 1, 2 , 4 );
+	Cerebro* cerebro = cerebro_nuevo( 4, 10, 10 , 4 );
 	puts("Cerebro creado.\n");
 	cerebro_mostrar( cerebro );
-
+	puts("------\n");
 }

@@ -44,11 +44,12 @@ void neurona_conectar( Neurona* n, uint32 neurona_capa_siguiente, uint32 funcion
 
 uint32 neurona_memoria( Neurona* n ){
 
+	puts("Neurona_memoria");
 	uint32 t = sizeof( Neurona );
-
+	printf("sizeof( neurona->conexiones ) = %u\n", sizeof(n->conexiones[0]));
 	if( n->conexiones ) {
-		t += sizeof( n->conexiones );
-		t += sizeof( n->funciones );
+		t += sizeof( n->conexiones[0] ) * n->n_conexiones;
+		t += sizeof( n->funciones[0] ) * n->n_conexiones;
 	}
 	return t;
 
@@ -81,7 +82,8 @@ void neurona_test(){
 
 	neurona_conectar( &neurona, 3, 5 );
 	neurona_conectar( &neurona, 7, 9 );
-
+	neurona_conectar( &neurona, 11, 13);
+	neurona_conectar( &neurona, 15, 17);
 	neurona_mostrar( &neurona );
 
 	puts("------");
