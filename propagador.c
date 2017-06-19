@@ -1,6 +1,9 @@
 
 void propagador_funcion( float valor, uint32 funcion, Neurona* destino ){
 
+
+	puts("propagador_funcion");
+	
 	switch( funcion ){
 
 		case 0:	// Pasar el valor
@@ -20,6 +23,8 @@ void propagador_funcion( float valor, uint32 funcion, Neurona* destino ){
 
 void propagador_neurona( Neurona* n, Capa* c_siguiente ){
 
+	puts("propagador_neurona");
+
 	uint32 n_conexiones = n->n_conexiones;
 
 	for (int i = 0; i < n_conexiones; ++i){
@@ -31,6 +36,8 @@ void propagador_neurona( Neurona* n, Capa* c_siguiente ){
 }
 
 void propagador_capa( Capa* c_actual, Capa* c_siguiente ){
+
+	puts("propagador_capa");
 
 	uint32 n_neuronas = c_actual->n_neuronas;
 

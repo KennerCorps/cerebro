@@ -7,6 +7,8 @@ typedef unsigned int uint32;
 #include "capa.c"
 #include "cerebro.c"
 
+#include "propagador.c"
+
 //#include "prueba_cerebro.c"
 
 int main(){
@@ -19,11 +21,23 @@ int main(){
 
 	//neurona_printear( capa_0->neuronas[4] );
 
-	neurona_test();
+	//neurona_test();
 
 	//capa_test();
 
 	//cerebro_test();
+
+	Cerebro* c;
+
+	c = cerebro_nuevo(3,3, 10, 3);
+
+	Capa* entrada = c->entrada;
+	Capa* capa_0 = c->capas[0];
+
+	capa_conectar( entrada, 0, 0, 0 );
+	
+
+	propagador_ejecutar( c );
 	//prueba_cerebro_iniciar();
 	return 0;
 

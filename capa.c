@@ -20,6 +20,12 @@ Capa* capa_nueva( uint32 tamano ){
 
 }
 
+void capa_conectar( Capa* actual, uint32 neurona_origen, uint32 neurona_destino, uint32 funcion ){
+
+	neurona_conectar( &actual->neuronas[ neurona_origen ], neurona_destino, funcion );
+
+}
+
 //////////// DEBUG ///////////
 
 uint32 capa_memoria( Capa* c ){
