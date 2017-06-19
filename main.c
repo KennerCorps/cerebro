@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef unsigned int uint32;
 
@@ -7,6 +8,7 @@ typedef unsigned int uint32;
 #include "capa.c"
 #include "cerebro.c"
 
+#include "funciones.c"
 #include "propagador.c"
 
 //#include "prueba_cerebro.c"
@@ -35,7 +37,6 @@ int main(){
 	Capa* capa_0 = c->capas[0];
 
 	capa_conectar( entrada, 0, 0, 0 );
-	
 
 	propagador_ejecutar( c );
 	//prueba_cerebro_iniciar();

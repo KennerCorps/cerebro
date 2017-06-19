@@ -32,7 +32,7 @@ int neurona_buscar_conexion( Neurona* n, uint32 neurona_capa_siguiente ){
 void neurona_adaptar_memoria_a_conexiones( Neurona* n ){
 
 	n->conexiones 	= realloc(n->conexiones, 	sizeof( uint32 ) * 	n->n_conexiones );
-	n->pesos		= realloc(n->pesos, 		sizeof(float) 	 * 	n->n_conexiones );	
+	n->pesos		= realloc(n->pesos, 		sizeof(float) 	 * 	n->n_conexiones );
 	n->funciones  	= realloc(n->funciones,  	sizeof( uint32 ) * 	n->n_conexiones );
 
 }
@@ -65,9 +65,9 @@ void neurona_desconectar( Neurona* n, uint32 neurona_capa_siguiente){
 
 		printf("Desconectando neurona de %u\n", neurona_capa_siguiente );
 		for(int i = i_conexion + 1; i < n->n_conexiones; ++i ){
-			n->conexiones[ i - 1 ] = n->conexiones[ i ];
-			n->pesos[ i -1 ]	   = n-
-			n->funciones[  i - 1 ] = n->funciones[  i ];
+			n->conexiones[ i - 1 ]	= n->conexiones[ i ];
+			n->pesos[ i -1 ]	= n->pesos[ i ];
+			n->funciones[  i - 1 ]	= n->funciones[  i ];
 		}
 
 		n->n_conexiones -= 1;
