@@ -7,7 +7,7 @@ typedef unsigned int uint32;
 #include "capa.c"
 #include "cerebro.c"
 
-#include "prueba_cerebro.c"
+//#include "prueba_cerebro.c"
 
 int main(){
 
@@ -24,7 +24,7 @@ int main(){
 	//capa_test();
 
 	//cerebro_test();
-	prueba_cerebro_iniciar();
+	//prueba_cerebro_iniciar();
 	return 0;
 
 }
