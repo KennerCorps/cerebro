@@ -5,10 +5,7 @@ typedef struct cerebro{
 	Capa* salida;
 	Capa** capas;
 
-	uint32 n_entradas;
-	uint32 n_salidas;
 	uint32 n_capas;
-	uint32 capas_altura;
 
 }Cerebro;
 
@@ -17,10 +14,7 @@ Cerebro* cerebro_nuevo( uint32 n_entradas, uint32 n_salidas, uint32 n_capas, uin
 
 	Cerebro* cerebro = malloc( sizeof( Cerebro ) );
 
-	cerebro->n_entradas = n_entradas;
-	cerebro->n_salidas = n_salidas;
 	cerebro->n_capas = n_capas;
-	cerebro->capas_altura = capas_altura;
 
 	cerebro->entrada = capa_nueva( n_entradas );
 	cerebro->salida = capa_nueva( n_salidas );
@@ -31,6 +25,40 @@ Cerebro* cerebro_nuevo( uint32 n_entradas, uint32 n_salidas, uint32 n_capas, uin
 		cerebro->capas[i] = capa_nueva( capas_altura );
 	}
 	return cerebro;
+}
+
+Cerebro* cerebro_nuevo_vacio(){
+
+	Cerebro* c = malloc( sizeof( Cerebro ) );
+	
+	c->n_capas = 0;
+
+}
+
+void cerebro_insertar_entrada( Cerebro* c, Capa* entrada ){
+	c->entrada = entrada;
+}
+
+void cerebro_insertar_salida( Cerebro* c, Capa* salida ){
+	c->salida = salida;
+}
+
+void cerebro_insertar_capa( Cerebro* c, Capa* capa ){
+
+	if( c->n_capas == 0 ){
+		c->n_capas = 1;
+		c->capas = malloc( sizeof( Capa** ) );
+
+		c->capas[ 0 ] = capa;
+	}
+
+	else{
+		c->n_capas += 1;
+		c->capas = realloc( c->capas, sizeof( Capa** ) * c->n_capas );
+
+		c->capas[ c->n_capas - 1 ] = capa;
+	}
+
 }
 
 
@@ -61,7 +89,7 @@ void cerebro_mostrar( Cerebro* c ){
 	printf("Sizeof capas = %d\n", sizeof(c->capas) );
 
 	//printf("Numero de entradas = %d\n", c->n_entradas );
-	printf("Numero de entradas = %d\nNumero de salidas = %d\nNumero de capas = %d\nAltura de capas = %d\n\n", c->n_entradas, c->n_salidas, c->n_capas, c->capas_altura );
+	printf("\nNumero de capas = %d\n\n", c->n_capas );
 
 	printf("Memoria utilizada por el cerebro = %u bytes\n\n", cerebro_memoria( c ) );
 }
