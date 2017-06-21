@@ -24,6 +24,18 @@ Capa* capa_nueva( uint32 tamano ){
 
 }
 
+void capa_establecer_funcion_en_neuronas( Capa* capa, uint32 funcion ){
+
+	uint32 n_neuronas = capa->n_neuronas;
+	
+	for( int i = 0; i < n_neuronas; ++i ){
+
+		capa->neuronas[ i ].funcion = funcion;
+	
+	}
+
+}
+
 
 //////////// DEBUG ///////////
 
